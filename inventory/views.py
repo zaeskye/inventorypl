@@ -17,12 +17,16 @@ def login_view(request):
     return render(request, 'registration/login.html')
 
 def index(request):
-    return render (request,"index.html")
-
-def dashboard(request):
     products = Product.objects.all()
-    orders = Order.objects.all()
-    return render(request, 'dashboard.html', {'products': products, 'orders': orders})
+    all_prods = len(Product.objects.all())
+    total_products = all_prods
+    context = {
+        'title': 'Home',
+        'products': products,
+        'count_products': all_prods,
+        'total_products': total_products,
+    }
+    return render (request,"index.html")
 
 def add_supplier(request):
     if request.method == 'POST':
